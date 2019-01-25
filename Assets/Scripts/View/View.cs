@@ -26,6 +26,11 @@ public class View : MonoBehaviour {
 	private Text rankHighScore;
 	private Text rankNumbersGame;
 
+	public Button leftBtn;
+	public Button rightBtn;
+	public Button upBtn;
+	public Button downBtn;
+
 	// Use this for initialization
 	void Awake () {
 		ctrl = GameObject.FindGameObjectWithTag("Ctrl").GetComponent<Ctrl>();
@@ -46,6 +51,11 @@ public class View : MonoBehaviour {
 		rankScore = transform.Find("Canvas/RankUI/ScoreLable/Text").GetComponent<Text>();
 		rankHighScore = transform.Find("Canvas/RankUI/HighScoreLable/Text").GetComponent<Text>();
 		rankNumbersGame = transform.Find("Canvas/RankUI/NumberGamesLable/Text").GetComponent<Text>();
+
+		leftBtn = transform.Find("Canvas/GameUI/LeftButton").GetComponent<Button>();
+		rightBtn = transform.Find("Canvas/GameUI/RightButton").GetComponent<Button>();
+		upBtn = transform.Find("Canvas/GameUI/UpButton").GetComponent<Button>();
+		downBtn = transform.Find("Canvas/GameUI/DownButton").GetComponent<Button>();
 	}
 	#region menuUI
 	public void ShowMenu()
@@ -74,14 +84,14 @@ public class View : MonoBehaviour {
 		this.score.text = score.ToString();
 		this.highScore.text = highScore.ToString();
 		gameUI.gameObject.SetActive(true);
-		gameUI.DOAnchorPosY(-91f, 0.5f);
+		//gameUI.DOAnchorPosY(-91f, 0.5f);
 	}
 	public void HideGameUI()
 	{
-		gameUI.DOAnchorPosY(95f,0.5f).OnComplete(() =>
-		{
+		//gameUI.DOAnchorPosY(95f,0.5f).OnComplete(() =>
+		//{
 			gameUI.gameObject.SetActive(false);
-		});
+		//});
 	}
 	public void UpdateGameUI(int score, int highScore)
 	{

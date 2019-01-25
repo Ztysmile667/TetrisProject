@@ -18,7 +18,13 @@ public class Shape : MonoBehaviour {
 	{
 		pivot = transform.Find("Pivot");
 	}
-
+	private void Start()
+	{
+		ctrl.view.downBtn.onClick.AddListener(Down);
+		ctrl.view.leftBtn.onClick.AddListener(left);
+		ctrl.view.upBtn.onClick.AddListener(Up);
+		ctrl.view.rightBtn.onClick.AddListener(Right);
+	}
 	private void Update()
 	{
 		if (isPause) return;
@@ -82,7 +88,7 @@ public class Shape : MonoBehaviour {
 		isPause = false;
 	}
 	/// <summary>
-	/// 对方块的控制
+	/// 对方块的控制PC
 	/// </summary>
 	private void InputControl()
 	{
@@ -135,5 +141,59 @@ public class Shape : MonoBehaviour {
 			stepTime /= multiple;
 		}
 	}
+	#region 对方块的控制Android
+	public void Up()
+	{
+		if (isPause) return;
+		transform.RotateAround(pivot.position, Vector3.forward, -90);
+		if (ctrl.model.IsValidMapPositon(this.transform) == false)
+		{
+			transform.RotateAround(pivot.position, Vector3.forward, 90);
+		}
+		else
+		{
+			ctrl.audioManager.PlayControl();
+		}
+	}
+	public void Down()
+	{
+		if (isPause) return;
+		isSpeedup = true;
+		stepTime /= multiple;
+	}
+	public void left()
+	{
+		if (isPause) return;
+		Vector3 pos = transform.position;
+		pos.x += -1;
+		transform.position = pos;
+		if (ctrl.model.IsValidMapPositon(this.transform) == false)
+		{
+			pos.x -= -1;
+			transform.position = pos;
+		}
+		else
+		{
+			ctrl.audioManager.PlayControl();
+		}
+	}
+	public void Right()
+	{
+		if (isPause) return;
+		Vector3 pos = transform.position;
+		pos.x += 1;
+		transform.position = pos;
+		if (ctrl.model.IsValidMapPositon(this.transform) == false)
+		{
+			pos.x -= 1;
+			transform.position = pos;
+		}
+		else
+		{
+			ctrl.audioManager.PlayControl();
+		}
+	}
+
+	#endregion
 
 }

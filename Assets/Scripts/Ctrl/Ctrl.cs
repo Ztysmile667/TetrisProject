@@ -42,4 +42,5 @@ public class Ctrl : MonoBehaviour {
 		fsm.SetCurrentState(s);
 
 	}
+
 }
