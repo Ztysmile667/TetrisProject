@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	private bool isInPause = true;//游戏是否暂停
 	public Shape[] shapes;//方块预制件
 	public Color[] colors;
-	private Shape currentShape = null;
+	public Shape currentShape = null;
 	private Ctrl ctrl;
 	private Transform blockHolder;
 
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour {
 		currentShape = GameObject.Instantiate(shapes[index]);
 		currentShape.transform.parent = blockHolder;
 		currentShape.Init(colors[indexColor],ctrl,this);
+		AddSpeed(ctrl.model.Score);
 	}
 	/// <summary>
 	/// 方块落下来了(完成时)
@@ -83,5 +84,27 @@ public class GameManager : MonoBehaviour {
 			PauseGame();
 			ctrl.view.ShowGameOverUI(ctrl.model.Score);
 		}
+	}
+
+	public void AddSpeed(int score)
+	{
+		
+		if (score <= 5000 )
+		{
+			currentShape.stepTime = 0.8f;
+		}
+		if (score > 5000&&score<=10000)
+		{
+			currentShape.stepTime = 0.6f;
+		}
+		if(score > 10000&& score <= 20000)
+		{
+			currentShape.stepTime = 0.5f;
+		}
+		if(score > 20000)
+		{
+			currentShape.stepTime = 0.3f;
+		}
+		Debug.Log(currentShape.stepTime);
 	}
 }

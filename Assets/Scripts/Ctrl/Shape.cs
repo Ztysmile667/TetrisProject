@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shape : MonoBehaviour {
 
@@ -8,7 +9,7 @@ public class Shape : MonoBehaviour {
 	private Ctrl ctrl;
 	private bool isPause = false;
 	private float timer = 0;//计时器，多少秒下落一个格
-	private float stepTime = 0.8f;//多少秒下喽
+	public float stepTime = 0;//多少秒下喽
 	private Transform pivot;
 	private int multiple = 20;//加速倍数
 	private bool isSpeedup = false;//是否加速
